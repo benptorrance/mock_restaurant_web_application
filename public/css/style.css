@@ -2,7 +2,33 @@
 
 /*Note: Pick three main colors for the web page and then use those to style the page appropriately.
 
-Lighter Background color:
-Color that pops out:
-Dark Accent color:
+Lighter Background color: White
+Color that pops out: Red
+Dark Accent color: Black
 */
+@media screen{
+    body{
+        background-color: rgb(180, 180, 180);
+    }
+    nav{
+        background-color: rgb(206, 20, 20);
+    }
+    main{
+        display: flex;
+        flex-direction: column;
+    }
+    section{
+        background-color: gray;
+    }
+    img{
+        width: 100%;
+    }
+    a{
+        color: black;
+    }
+}
+@media (min-width:768px){
+    img{
+        width: 20%;
+    }
+}
