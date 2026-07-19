@@ -3,77 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Mock Restaurant - Menu Page</title>
+    <link rel="reset" href="/public/css/reset.css">
+    <link rel="stylesheet" href="/public/css/style.css">
 </head>
-<body>
+<body id="menu">
     <header>
         <nav>
-            <img id="logo" src="./public/images/cburger_logo.png">
-            <a href="/index.html">Home</a>
-            <a href="./menu.html">Menu</a>
-            <a href="./about.html">About</a>
+            <img id="logo" src="/public/images/cburger_logo.png">
+            <section>
+                <a href="/index.html">Home</a>
+                <a href="./menu.html">Menu</a>
+                <a href="./about.html">About</a>
+            </section>
             <!--Button element that opens the ordering modal-->
-            <button id="order_b">Start Your Order!</button>
+            <section>
+                <button id="login_btn">Sign In</button>
+                <button id="order_btn">Start Your Order!</button>
+            </section>
         </nav>
     </header>
     <main>
-        <section>
+        <section id="modal" class="modal_overlay">
+            <section class="modal_box">
+                <button id="close_btn"></button>
+            </section>
+        </section>
+        <section class="menu_items">
             <h2>Appetizers</h2>
-            <section class="item">
-                <h3>Nascar Nachos</h3>
-                <p>Tortilla chips, covered in a cheese sauce, tomatos, jalapeños, and ground beef. </p>
-            </section>
-            <section class="item">
-                <h3>Nascar Nachos</h3>
-                <p></p>
-            </section>
+            <h3>Nascar Nachos</h3>
+            <p>Tortilla chips, covered in a cheese sauce, tomatos, jalapeños, and ground beef. - 10.99</p>
+            <h3>Tire Stack</h3>
+            <p>A tower of fried onion rings, served with burnout sauce and ranch. - 9.99</p>
         </section>
-        <section>
+        <section class="menu_items">
             <h2>Sandwiches</h2>
-            <section class="item">
-                <h3>Classic Crash</h3>
-                <p></p>
-            </section>
-            <section class="item">
-                <h3>Earlybird Racer</h3>
-                <p></p>
-            </section>
-            <section class="item">
-                <h3>The Vettel</h3>
-                <p></p>
-            </section>
-            <section class="item">
-                <h3>Sub Sonic</h3>
-                <p></p>
-            </section>
+            <p>All Sandwiches are served with fries unless another side is specified.</p>
+            <h3>Classic Crash</h3>
+            <p>American cheese, sliced tomato, lettuce, burnout sauce, red onion, and pickles. - 15.99</p>
+            <h3>Earlybird Racer</h3>
+            <p>Cheddar cheese, hashbrowns, bacon, and an egg cooked to your preference. Served on a brioche bun. - 17.99</p>
+            <h3>The Vettel</h3>
+            <p>Montery jack cheese, BBQ sauce, a crispy onion ring, and grilled mushrooms. - 16.99</p>
+            <h3>Road Crosser</h3>
+            <p>Fried chicken, pickles, lettuce and spicy mayo. - 13.99</p>
+            <h3>Sub Sonic</h3>
+            <p>Ham and turkey, lettuce, tomaoes, red onions, banana peppers, and italian dressing . Served with kettle potato chips. - 15.99</p>
         </section>
-        <section>
+        <section class="menu_items">
             <h2>Entrees</h2>
+            <h3>The Roadkill</h3>
+            <p>A heaping portion of pulled pork slathered in our house BBQ sauce and topped with onion straws. 
+                This savory meal also comes with a side of homemade slaw, and a piece of toast. - 23.99</p>
+            <h3>F1 Tacos</h3>
+            <p>Seasoned tilapia, cabbage, diced red onion and tomatoes, cheese, cilantro and lime juice. Served with a small side of nachos. - 17.99</p>
         </section>
-        <section>
+        <section class="menu_items">
             <h2>Sides</h2>
+            <p>Sides on menu items may be substituted with regular sides at no charge, or with a premium side for $2.</p>
+
+            <h3>Regular</h3>
+            <p>Fries - 3.99</p>
+            <p>Green Beans - 2.99</p>
+            <p>Coleslaw - 3.99</p>
+            <p>Brussel Sprouts - 3.99</p>
+            <p>Fruit Cup - 1.99</p>
+
+            <h3>Premium</h3>
+            <p>Onion Rings - 5.99</p>
+            <p>Burnout Fries - Fries covered in cheese, bacon, and burnout sauce. - 6.99</p>
+
         </section>
-        <section>
+        <section class="menu_items">
             <h2>Deserts</h2>
-            <section class="item">
-                <h3>Burnout Fudge</h3>
-                <p></p>
-            </section>
-            <section class="item">
-                <h3>Crash Donuts</h3>
-                <p></p>
-            </section>
+            <h3>The Pitstop</h3>
+            <p>A scoop of vanilla ice cream, covered in a chocolate drizzle, nuts, sprinkles, and topped with a cherry. - 8.99</p>
+            <h3>Crash Donuts</h3>
+            <p>Small fried donuts covered in powdered sugar. - 7.99</p>
+            <h3>Divebomb Fudge</h3>
+            <p>A large serving of home made fudge - 5.99</p>
         </section>
-        <section>
+        <section class="menu_items">
             <h2>Drinks</h2>
-            <section class="item">
-                <h3>Nitro Cocktail</h3>
-                <p></p>
-            </section>
+            <h3>Nitro Cocktail</h3>
+            <p>Jamaican rum and campari with pinaple and lime juice. - 4.99</p>
         </section>
     </main>
     <footer>
-
+        <section>
+            <h3>Contact Info</h3>
+            <p>crashburgers@delicious.com</p>
+            <p>+1 (201)-974-7382</p>
+            <p>1095 Runway Street, Indianapolis, Indiana</p>
+        </section>
     </footer>
 </body>
 </html>

@@ -7,15 +7,20 @@
     <link rel="reset" href="./public/css/reset.css">
     <link rel="stylesheet" href="./public/css/style.css">
 </head>
-<body>
+<body id="home">
     <header>
         <nav>
             <img id="logo" src="./public/images/cburger_logo.png">
-            <a href="/index.html">Home</a>
-            <a href="./public/pages/menu.html">Menu</a>
-            <a href="./public/pages/about.html">About</a>
+            <section>
+                <a href="/index.html">Home</a>
+                <a href="./public/pages/menu.html">Menu</a>
+                <a href="./public/pages/about.html">About</a>
+            </section>
             <!--Button element that opens the ordering modal-->
-            <button id="order_b">Start Your Order!</button>
+            <section>
+                <button id="login_btn">Sign In</button>
+                <button id="order_btn">Start Your Order!</button>
+            </section>
         </nav>
     </header>
     <main>
@@ -23,7 +28,7 @@
             <h1>The Vettel</h1>
             <p>Crash Burger's newest sandwich! Only available for a limited time.</p>
         </section>
-        <section>
+        <section id="main_info">
             <p>Welcome to Crash Burgers! For 45 years we have prided ourselves on providing the most delicious and a welcoming environment to our patrons.</p>
         </section>
         <section>
@@ -36,15 +41,15 @@
             </section>
             <section class="menu_ad">
                 <h3>Happy Hour</h3>
-                <p>Every day from 3PM to 6PM, enjoy up to 50% off on drinks.</p>
+                <p>Every day from 3PM to 6PM, enjoy up to 50% off on drinks and appetizers.</p>
             </section>
             <section class="menu_ad">
-                <h3>The Roadkill</h3>
-                <p>Description of The Roadkill entree.</p>
+                <h3>Nascar Nachos</h3>
+                <p>Tortilla chips, covered in a cheese sauce, tomatos, jalapeños, and ground beef. - 10.99</p>
             </section>
             <section class="menu_ad">
-                <h3>The Roadkill</h3>
-                <p>Description of The Roadkill entree.</p>
+                <h3>Start Your Engines!</h3>
+                <p>Thursday nights only! Enjoy a free desert with your meal!</p>
             </section>
         </section>
     </main>
@@ -57,5 +62,5 @@
         </section>
     </footer>
 </body>
-<script href="./public/scripts/index.js"></script>
+<script src="./public/scripts/index.js"></script>
 </html>
