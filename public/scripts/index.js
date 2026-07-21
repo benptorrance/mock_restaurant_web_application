@@ -1,19 +1,29 @@
 
+const order_btn = document.getElementById("order_btn");
+const login_btn = document.getElementById("login_btn");
+const modal = document.getElementById("modal");
+const close_btn = document.getElementById("close_btn");
 const cart = new Map();
 
 
-//Button event listener and functions
-document.getElementById("order_btn").addEventListener("click", order)
+//Button event listeners
+order_btn.addEventListener("click", order);
+login_btn.addEventListener("click", login);
+close_btn.addEventListener("click", close);
 
 
 function order(){
     console.log("Start Your Order! Pressed!");
-    location.href = "/public/pages/menu.html";
-    
+
+    modal.classList.add("show");
 }
 
 function login(){
-    console.log("Sign In Pressed!")
+    console.log("Sign In Pressed!");
+}
+
+function close(){
+    modal.classList.remove("show");
 }
 
 function addToCart(item){
@@ -22,5 +32,6 @@ function addToCart(item){
 }
 
 function removeFromCart(){
-    cart.delete(item)
+    //Function that removes an item from the cart.
+    cart.delete(item);
 }
