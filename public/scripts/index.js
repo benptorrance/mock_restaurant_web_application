@@ -20,6 +20,8 @@ close_btn.addEventListener("click", close);
 function order(){
     console.log("Start Your Order! Pressed!");
     modal.classList.add("show");
+    console.log(cart.get(1));
+    document.getElementById("cart_text").textContent = cart.get(1); 
 }
 
 function login(){
@@ -42,19 +44,30 @@ function addToCart(){
     //add functionality that will allow the user to put in how many they would like to order when they add item to cart
     let item = event.target.parentElement.querySelector(".item_name");
     let price = event.target.parentElement.querySelector(".item_price");
-    console.log(typeof cart.get(1));
-    if (typeof cart.get(1) == 'object'){
-        console.log("Inside if");
-        console.log("Amount Before: "+ cart.get(1).food_amount);
-        let food = new Food(item.innerText, price.innerText, cart.get(1).food_amount +1);
-        cart.set(1,food);
-        console.log("Amount After: "+ cart.get(1).food_amount);
+    let pointer = 0;
+
+    //Cycles through the map to see if the item is already present, then sets the pointer variable to. This prevents duplicate entries and also that we targe the right one.
+    for (let i = 0; i < cart.size; i++) {
+            value = cart.get(i);
+            if(value.food_name == item.innerText){
+                console.log ("Yep " + value.food_name);
+                pointer = i;
+                break;
+            } else{
+                console.log ("Nope " + value.food_name);
+                pointer = cart.size + 1;
+            }
+    }
+
+    if (typeof cart.get(pointer) == 'object'){
+        let food = new Food(item.innerText, price.innerText, cart.get(pointer).food_amount +1);
+        cart.set(pointer,food);
     } else{
-        console.log("Inside else");
         let food = new Food(item.innerText, price.innerText, 1);
-        cart.set(1, food);
+        cart.set(cart.size, food);
         console.log(cart.get(item.innerText));
     }
+    cart.forEach((value, key) => {console.log(value)});
     console.log("Added " + item.innerText + " to Cart!");
 }
 
