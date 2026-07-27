@@ -8,7 +8,7 @@ const cart = new Map();
 
 
 //Button event listeners
-order_btn.addEventListener("click", order);
+order_btn.addEventListener("click", display_cart);
 for(let i = 0; i < cart_btns.length; i++){
         cart_btns[i].addEventListener("click", addToCart);
     }
@@ -17,11 +17,39 @@ close_btn.addEventListener("click", close);
 
 
 
-function order(){
-    console.log("Start Your Order! Pressed!");
+function display_cart(){
     modal.classList.add("show");
-    console.log(cart.get(1));
-    document.getElementById("cart_text").textContent = cart.get(1); 
+    const cart_box = document.getElementById("cart");
+    const item_list = []
+
+    //Loops through all the items and adds them to an array so that it can be printed out on the cart modal.
+    cart.forEach((value, key) => {
+        let section = document.createElement("section");
+        let name = document.createElement("p");
+        let price = document.createElement("p");
+
+        name.innerText = value.food_name;
+        price.innerText = value.food_price;
+
+        section.id = `item_${value.food_name}`;
+        name.id = "item_name";
+        price.id = "item_price";
+            
+        section.appendChild(name);
+        section.appendChild(price);
+
+        item_list.push(section);
+        }
+    );
+
+    //Prevents the display_cart function from replacing the p tag until after there is something in the cart. If the cart returns to empty, the p tag is added back.
+    if(cart.size != 0){
+        cart_box.replaceChildren(...item_list);
+    } else{
+        let para = document.createElement("p");
+        para.innerText = "Cart is empty!";
+        cart_box.replaceChildren(para);
+    }
 }
 
 function login(){
@@ -73,5 +101,19 @@ function addToCart(){
 
 function removeFromCart(){
     //Function that removes an item from the cart.
+    let pointer = null;
+
+    //Same loop as from above to locate the specific item in the cart
+    for (let i = 0; i < cart.size; i++) {
+            value = cart.get(i);
+            if(value.food_name == item.innerText){
+                console.log ("Yep " + value.food_name);
+                pointer = i;
+                break;
+            } else{
+                console.log ("Nope " + value.food_name);
+            }
+    }
+
     cart.delete(item);
 }
