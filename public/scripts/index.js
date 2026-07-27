@@ -46,12 +46,17 @@ function Food(name, price, amount){
 function updateCart(){
 
     let item = event.target.parentElement.querySelector(".item_name");
-    let price = event.target.parentElement.querySelector(".item_price");
-    let amount = 0;
-    if (event.target.parentElement.querySelector(".item_amount") != null){
-        let amount = event.target.parentElement.querySelector(".item_amount");
-        amount = Number(amount.value);
+    let price;
+    let amount;
+    for (let i=0; i<cart.size; i++){
+        if(item == cart.get(i).food_name){
+            price = cart.get(i).food_price;
+            amount = cart.get(i).food_amount;
+            return price, amount;
+        }
     }
+    
+    
 
     /*If statement that determines whether to add remove or set the amount of the item in the cart modal. Currently only the
     add_item is present as it is the only one that is working.
