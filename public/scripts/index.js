@@ -4,7 +4,10 @@ const cart_btns = document.getElementsByClassName("to_cart_btn");
 const login_btn = document.getElementById("login_btn");
 const close_btn = document.getElementById("close_btn");
 const modal = document.getElementById("modal");
-const cart = new Map();
+
+/*Used a ternary operator here because it was an effective and easily readable way to have the script determine if a new cart needed to be made 
+or if it pulls in existing cart data. */
+const cart = (localStorage.cart) ? new Map(JSON.parse(localStorage.cart)) : new Map();
 
 
 //Button event listeners
@@ -37,6 +40,7 @@ function close(){
     modal.classList.remove("show");
 }
 
+//This function allows the map to contain all of each item's data in a single key, value pair.
 function Food(name, price, amount){
     this.food_name = name;
     this.food_price = price;
@@ -66,13 +70,15 @@ function updateCart(){
         setItem(id);
     }
     updateModal();
+    saveCart();
 }
 
 function updateModal(){
     const cart_box = document.getElementById("cart_modal");
     const item_list = []
 
-    //Loops through all the items and adds them to an array so that it can be printed out on the cart modal.
+    /*Puts each piece of information about item into its own element then appends that into a section so its all grouped in one place.
+    This is good for semantic HTML as these elements share a theme, but also so that each food section can be targeted with the same css*/
     cart.forEach((value, key) => {
         let section = document.createElement("section");
         let name = document.createElement("p");
@@ -89,7 +95,7 @@ function updateModal(){
         amount.setAttribute("type", "number");
         amount.setAttribute("value", value.food_amount);
 
-        section.id = `item_${value.food_name}`;
+        section.className = `food_item`;
         name.className = "item_name";
         price.className = "item_price";
         amount.className = "item_amount";
@@ -158,7 +164,6 @@ function removeItem(id = cart.size){
                 cart.delete(key);
             };
         })
-        console.log(cart);
     }
 }
 
@@ -180,4 +185,9 @@ function setItem(id){
             };
         })
     }
+}
+
+//This function saves the cart to a JSON file in local storage
+function saveCart(){
+    localStorage.cart = JSON.stringify(Array.from(cart.entries()))
 }
