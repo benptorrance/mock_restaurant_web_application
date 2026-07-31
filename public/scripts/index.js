@@ -45,31 +45,26 @@ function Food(name, price, amount){
 
 function updateCart(){
 
-    let item = event.target.parentElement.querySelector(".item_name");
-    let price;
-    let amount;
     let id;
   
     /*Because this is already grabbing the info from the cart, I can improve this by removing this same loop from the add, remove, and set item functions by making
     a variable to hold i, which will be the item's ID in the cart.
     */
     for (let i=0; i<cart.size; i++){
-        if(item.innerText == cart.get(i).food_name){
-            price = cart.get(i).food_price;
-            amount = cart.get(i).food_amount;
+        if(event.target.parentElement.querySelector(".item_name").innerText == cart.get(i).food_name){
             id = i;
         }
     }
     /*If statement that determines whether to add remove or set the amount of the item in the cart modal. Currently only the
     add_item is present as it is the only one that is working.
     */
-    console.log("Amount: " + amount);
     if (event.target.className == "item_add" || event.target.className == "to_cart_btn"){
         addItem(id);
     } else if(event.target.className == "item_rmve"){
         removeItem(id);
-    } else if(event.target.className == "item_rmve"){
-
+    } else if(event.target.className == "item_amount"){
+        console.log("set");
+        setItem(id);
     }
     updateModal();
 }
@@ -120,6 +115,11 @@ function updateModal(){
         for(let i = 0; i < item_list.length; i++){
             item_list[i].querySelector(".item_add").addEventListener("click", updateCart);
             item_list[i].querySelector(".item_rmve").addEventListener("click", updateCart);
+            item_list[i].querySelector(".item_amount").addEventListener("keydown", () => {
+                console.log(event.key);
+                if(event.key === "Enter")
+                    updateCart();
+            });
         }
     } else{
         let para = document.createElement("p");
@@ -166,11 +166,22 @@ function removeItem(id = cart.size){
 
 /*Started writing the setItem function, which will take info on keydown of the 'enter' key and 
 set the food_amount of the specific item in the cart to whatever value is in the input. */
-function setItem(id, amount){
+function setItem(id){
 
-    if (amount == 0){
+    let amount = event.target.parentElement.querySelector(".item_amount").value;
+    console.log(amount);
+
+    if(cart.get(id).food_amount == 0){
         cart.delete(id);
+        cart.forEach((value, key) => {
+            if (key > id){
+                cart.set(key -1, value);
+                cart.delete(key);
+            };
+        })
+        console.log(cart);
     } else{
         let food = new Food(cart.get(id).food_name, cart.get(id).food_price, amount)
+        cart.set(id, food);
     }
 }
