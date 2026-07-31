@@ -63,7 +63,6 @@ function updateCart(){
     } else if(event.target.className == "item_rmve"){
         removeItem(id);
     } else if(event.target.className == "item_amount"){
-        console.log("set");
         setItem(id);
     }
     updateModal();
@@ -116,7 +115,6 @@ function updateModal(){
             item_list[i].querySelector(".item_add").addEventListener("click", updateCart);
             item_list[i].querySelector(".item_rmve").addEventListener("click", updateCart);
             item_list[i].querySelector(".item_amount").addEventListener("keydown", () => {
-                console.log(event.key);
                 if(event.key === "Enter")
                     updateCart();
             });
@@ -169,7 +167,9 @@ set the food_amount of the specific item in the cart to whatever value is in the
 function setItem(id){
 
     let amount = event.target.parentElement.querySelector(".item_amount").value;
-    console.log(amount);
+
+    let food = new Food(cart.get(id).food_name, cart.get(id).food_price, amount)
+        cart.set(id, food);
 
     if(cart.get(id).food_amount == 0){
         cart.delete(id);
@@ -179,9 +179,5 @@ function setItem(id){
                 cart.delete(key);
             };
         })
-        console.log(cart);
-    } else{
-        let food = new Food(cart.get(id).food_name, cart.get(id).food_price, amount)
-        cart.set(id, food);
     }
 }
