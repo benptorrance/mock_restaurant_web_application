@@ -10,12 +10,12 @@ const cart = new Map();
 //Button event listeners
 if(redirect_btn == null){
     order_btn.addEventListener("click", display_cart);
+    for(let i = 0; i < cart_btns.length; i++){
+        cart_btns[i].addEventListener("click", updateCart);
+    }
 } else{
     redirect_btn.addEventListener("click", redirect);
 }
-for(let i = 0; i < cart_btns.length; i++){
-        cart_btns[i].addEventListener("click", updateCart);
-    }
 login_btn.addEventListener("click", login);
 //This currently throws an error on the Home and About screens, but that is due to there not being a close_btn element on those pages yet.
 close_btn.addEventListener("click", close);
@@ -48,33 +48,26 @@ function updateCart(){
     let item = event.target.parentElement.querySelector(".item_name");
     let price;
     let amount;
+    let id;
+  
+    /*Because this is already grabbing the info from the cart, I can improve this by removing this same loop from the add, remove, and set item functions by making
+    a variable to hold i, which will be the item's ID in the cart.
+    */
     for (let i=0; i<cart.size; i++){
-        if(item == cart.get(i).food_name){
+        if(item.innerText == cart.get(i).food_name){
             price = cart.get(i).food_price;
             amount = cart.get(i).food_amount;
-            return price, amount;
+            id = i;
         }
     }
-    
-    
-
     /*If statement that determines whether to add remove or set the amount of the item in the cart modal. Currently only the
     add_item is present as it is the only one that is working.
     */
+    console.log("Amount: " + amount);
     if (event.target.className == "item_add" || event.target.className == "to_cart_btn"){
-
-        if(amount != 0){
-            updateItem(item, price, amount);
-        } else {
-            updateItem(item, price, amount +1)
-        }
-    } 
-    else if(event.target.className == "item_rmve"){
-        if(amount != 0){
-            updateItem(item, price, amount-1);
-        } else {
-            removeItem(item);
-        }
+        addItem(id);
+    } else if(event.target.className == "item_rmve"){
+        removeItem(id);
     } else if(event.target.className == "item_rmve"){
 
     }
@@ -123,11 +116,11 @@ function updateModal(){
     if(cart.size != 0){
         cart_box.replaceChildren(...item_list);
 
+        //Note: This can be updated so that one event listener can watch the parent element and determine which function to run by the event.target's class element.
         for(let i = 0; i < item_list.length; i++){
             item_list[i].querySelector(".item_add").addEventListener("click", updateCart);
             item_list[i].querySelector(".item_rmve").addEventListener("click", updateCart);
         }
-
     } else{
         let para = document.createElement("p");
         para.innerText = "Cart is empty!";
@@ -137,43 +130,47 @@ function updateModal(){
 
 }
 
-function updateItem(item = event.target.parentElement.querySelector(".item_name"), price = event.target.parentElement.querySelector(".item_price"), amount = 1){
+function addItem(id = cart.size){
     //Function that will place the item object passed to it and add that to the cart.
 
-    let pointer = 0;
-
-    //Cycles through the map to see if the item is already present, then sets the pointer variable to. This prevents duplicate entries and also that we targe the right one.
-    for (let i = 0; i < cart.size; i++) {
-            value = cart.get(i);
-            if(value.food_name == item.innerText){
-                pointer = i;
-                break;
-            } else{
-                pointer = cart.size + 1;
-            }
-    }
-
-    if (typeof cart.get(pointer) == 'object'){
-        let food = new Food(item.innerText, price.innerText, cart.get(pointer).food_amount + amount);
-        cart.set(pointer, food);
+    if (typeof cart.get(id) == 'object'){
+        let food = new Food(cart.get(id).food_name, cart.get(id).food_price, cart.get(id).food_amount + 1);
+        cart.set(id, food);
     } else{
+        //These are only declared inside this else statement as they are unneeded in a larget scope.
+        let item = event.target.parentElement.querySelector(".item_name");
+        let price = event.target.parentElement.querySelector(".item_price");
+
         let food = new Food(item.innerText, price.innerText, 1);
         cart.set(cart.size, food);
     }
 }
 
-function removeItem(){
-    //Function that removes an item from the cart.
-    let pointer = null;
-    console.log("hello");
-    //Same loop as from above to locate the specific item in the cart
-    for (let i = 0; i < cart.size; i++) {
-            value = cart.get(i);
-            if(value.food_name == item.innerText){
-                pointer = i;
-                break;
-            }
-    }
+//Function that removes an item from the cart. Takes in only item and the amount in the cart. No need to take in price.
+function removeItem(id = cart.size){
 
-    cart.delete(item);
+    let food = new Food(cart.get(id).food_name, cart.get(id).food_price, cart.get(id).food_amount - 1);
+    cart.set(id, food);
+
+    if(cart.get(id).food_amount == 0){
+        cart.delete(id);
+        cart.forEach((value, key) => {
+            if (key > id){
+                cart.set(key -1, value);
+                cart.delete(key);
+            };
+        })
+        console.log(cart);
+    }
+}
+
+/*Started writing the setItem function, which will take info on keydown of the 'enter' key and 
+set the food_amount of the specific item in the cart to whatever value is in the input. */
+function setItem(id, amount){
+
+    if (amount == 0){
+        cart.delete(id);
+    } else{
+        let food = new Food(cart.get(id).food_name, cart.get(id).food_price, amount)
+    }
 }
