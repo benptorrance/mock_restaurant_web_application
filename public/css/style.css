@@ -56,23 +56,6 @@ two conflicting instructions for the same element.*/
         flex-direction: column;
         border-radius: 20px;
     }
-    /*The :not() pseudo class is here to prevent the modal from adopting the styling applied to its sibling elements. If it is removed, it causes some issues with the
-    margins on the modal.
-    */
-    main section:not(#modal){
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-    main > section:not(#modal){
-        background-color: rgb(255, 144, 41);
-        border: solid;
-        border-width: 2px;
-        border-color: black;
-        margin: 1.25% 0;
-    }
-
     footer{
         background-color: rgb(206, 20, 20);
         padding-left: 1%;
@@ -83,11 +66,7 @@ two conflicting instructions for the same element.*/
         margin-top: 2.5%;
     }
 
-    .menu_ad, .menu_items, #main_ad, #main_info{
-        padding: 0 50px;
-    }
-
-    /*Grouped the modal related stylings together to make it a little easier to look at*/
+/*Grouped the modal related stylings together to make it a little easier to look at*/
     .modal_overlay {
         display:none;
         position:fixed;
@@ -121,10 +100,70 @@ two conflicting instructions for the same element.*/
         cursor: pointer;
     }
 
+    /*Below is CSS for specific pages. First is index.html*/
+    #adverts{
+        background-color: rgb(255, 144, 41);
+        border: solid;
+        border-width: 2px;
+        border-color: black;
+        border-radius: 10px;
+        margin: 1.25% 0;
+    }
+    #head_ad, #head_info{
+        background-color: rgb(255, 144, 41);
+        border: solid;
+        border-width: 2px;
+        border-color: black;
+        border-radius: 10px;
+        margin: 1.25% 0;
+    }
+    .menu_ad, .menu_items, #head_ad, #head_info{
+        padding: 0 50px;
+    }
+    .menu_ad{
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        border-style: solid;
+        border-width: 7px;
+        border-color: rgb(90, 45, 0);
+        margin: 2vh 5vw;
+    }
+
+    /*This section is for menu.html*/
+    #menu{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+        background-color: rgb(255, 144, 41);
+        border: solid;
+        border-width: 2px;
+        border-color: black;
+
+    }
+
 }
 /*Media query for desktop screens.*/
 @media (min-width:768px){
     img{
         width: 8%;
+    }
+    main{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;   
+    }
+    #headline, #adverts, #head_ad{
+        margin-top: 0;
+    }
+    #headline{
+        display: flex;
+        flex-direction: column;
+        max-width: 50vw;
+    }
+    #adverts{
+        max-width: 30vw;
     }
 }
