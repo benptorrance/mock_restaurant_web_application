@@ -37,3 +37,10 @@ Integrate the Auth 0 API to allow users to create and login with an account that
 ## Node.js Web Server (Optional)
 -Set up a Node.js server using Express.js to serve the application.
 -Implement at least one route that the app uses (e.g., /weather, /emissions).
+
+# VII. Installation Instructions
+
+
+# VIII. User Test Credentials
+Username: TestUser
+Password: Password54321
