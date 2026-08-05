@@ -40,6 +40,10 @@ Integrate the Auth 0 API to allow users to create and login with an account that
 
 # VII. Installation Instructions
 
+Node
+npm
+serve 14.2.6
+html
 
 # VIII. User Test Credentials
 Username: TestUser

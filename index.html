@@ -11,14 +11,22 @@
     <header>
         <nav>
             <img id="logo" src="./public/images/cburger_logo.png">
-            <section>
+            <section id="pages">
                 <a href="/index.html">Home</a>
                 <a href="./public/pages/menu.html">Menu</a>
                 <a href="./public/pages/about.html">About</a>
             </section>
-            <!--Button element that opens the ordering modal-->
-            <section>
-                <button id="login_btn">Sign In</button>
+            <section id="view-loading">Loading...</section>
+            <section id="view-error"></section>
+            <section id ="view-unauthenticated">
+                <button onclick="client.loginWithRedirect({authorizationParams:{screen_hint:'signup'}})">Signup</button>
+                <button onclick="client.loginWithRedirect()">Login</button>
+                <button id="redirect_btn">Start Your Order!</button>
+            </section>
+            <section id ="view-authenticated">
+                <p>Logged in as:</p>
+                <span id ="user-email"></span>
+                <button onclick="client.logout({logoutParams:{returnTo:location.origin}})">Logout</button>
                 <button id="redirect_btn">Start Your Order!</button>
             </section>
         </nav>
@@ -66,5 +74,7 @@
         </section>
     </footer>
 </body>
+<script src="https://cdn.auth0.com/js/auth0-spa-js/2.18/auth0-spa-js.production.js"></script>
+<script src="./public/scripts/auth0.js"></script>
 <script src="./public/scripts/index.js"></script>
 </html>

@@ -26,12 +26,26 @@
     </section>
     <main>
         <!--This section is a modal that is normally invisible until the order button above is pressed.-->
-        <section id="modal" class="modal_overlay">
+        <section id="order_modal" class="modal_overlay">
             <section class="modal_box">
-                <button id="close_btn">X</button>
+                <button class="close_btn">X</button>
                 <h2>Your Cart!</h2>
                 <section id="cart_modal">
                     <p>Cart is empty!</p>
+                </section>
+            </section>
+        </section>
+        <section id="login_modal" class="modal_overlay">
+            <section class="modal_box">
+                <button class="close_btn">X</button>
+                <h2>Log In</h2>
+                <section>
+                    <p>Username:</p>
+                    <input>
+                </section>
+                <section>
+                    <p>Password:</p>
+                    <input>
                 </section>
             </section>
         </section>
@@ -175,7 +189,6 @@
                 </section>
             </section>
         </section>
-
     </main>
     <footer>
         <section>

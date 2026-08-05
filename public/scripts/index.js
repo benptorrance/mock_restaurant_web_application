@@ -1,9 +1,9 @@
 const order_btn = document.getElementById("order_btn");
 const redirect_btn = document.getElementById("redirect_btn");
 const cart_btns = document.getElementsByClassName("to_cart_btn");
-const login_btn = document.getElementById("login_btn");
-const close_btn = document.getElementById("close_btn");
-const modal = document.getElementById("modal");
+const close_btns = document.getElementsByClassName("close_btn");
+const order_modal = document.getElementById("order_modal");
+const login_modal = document.getElementById("login_modal");
 
 /*Used a ternary operator here because it was an effective and easily readable way to have the script determine if a new cart needed to be made 
 or if it pulls in existing cart data. */
@@ -19,17 +19,14 @@ if(redirect_btn == null){
 } else{
     redirect_btn.addEventListener("click", redirect);
 }
-login_btn.addEventListener("click", login);
-//This currently throws an error on the Home and About screens, but that is due to there not being a close_btn element on those pages yet.
-close_btn.addEventListener("click", close);
-
-function display_cart(){
-    modal.classList.add("show");
-    updateModal()
+for(let i = 0; i < close_btns.length; i++){
+    close_btns[i].addEventListener("click", close);
 }
 
-function login(){
-    console.log("Sign In Pressed!");
+//Function Declarations
+function display_cart(){
+    order_modal.classList.add("show");
+    updateModal()
 }
 
 function redirect(){
@@ -37,7 +34,8 @@ function redirect(){
 }
 
 function close(){
-    modal.classList.remove("show");
+    order_modal.classList.remove("show");
+    login_modal.classList.remove("show");
 }
 
 //This function allows the map to contain all of each item's data in a single key, value pair.
@@ -191,3 +189,4 @@ function setItem(id){
 function saveCart(){
     localStorage.cart = JSON.stringify(Array.from(cart.entries()))
 }
+

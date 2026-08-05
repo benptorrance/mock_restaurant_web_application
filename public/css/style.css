@@ -23,9 +23,9 @@ two conflicting instructions for the same element.*/
         border-style: solid;
         border-width: 5px;
         border-radius: 20px;
-        margin-bottom: 2.5%;
+        margin: 2.5% 2.5% 5% 2.5%;
     }
-    nav section{
+    #pages{
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -76,11 +76,13 @@ two conflicting instructions for the same element.*/
         height: 100%;
         background: rgba(151, 148, 148, 0.473);
         overflow-y: auto;
+
+        text-align: center;
     }
     .modal_overlay.show{
         display: block;
     }
-    .modal_box{
+    .modal_box{        
         position: relative;
         width: 90%;
         max-width: 300px;
@@ -89,7 +91,15 @@ two conflicting instructions for the same element.*/
         margin: 100px auto;
         background: white;
     }
-    #close_btn{
+    .item_add, .item_rmve{
+        max-width: 10%;
+        margin: 0 1%;
+    }
+    .item_amount{
+        max-width: 25%;
+        margin: 0 1%;
+    }
+    .close_btn{
         position: absolute;
         right: 10px;
         top: 8px;
@@ -100,6 +110,28 @@ two conflicting instructions for the same element.*/
         cursor: pointer;
     }
 
+    /*Login status styling*/
+    #view-loading{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    #view-error, #view-unauthenticated{
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+    }
+    #view-authenticated{
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    #view-authenticated p{
+
+        text-wrap: wrap;
+    }
+
     /*Below is CSS for specific pages. First is index.html*/
     #adverts{
         background-color: rgb(255, 144, 41);
@@ -107,7 +139,7 @@ two conflicting instructions for the same element.*/
         border-width: 2px;
         border-color: black;
         border-radius: 10px;
-        margin: 1.25% 0;
+        margin: 5% 2.5% 2.5% 2.5%;
     }
     #head_ad, #head_info{
         background-color: rgb(255, 144, 41);
@@ -115,7 +147,10 @@ two conflicting instructions for the same element.*/
         border-width: 2px;
         border-color: black;
         border-radius: 10px;
-        margin: 1.25% 0;
+        margin: 0 2.5%;
+    }
+    #head_ad{
+        margin-bottom: 5%;
     }
     .menu_ad, .menu_items, #head_ad, #head_info{
         padding: 0 50px;
@@ -141,7 +176,8 @@ two conflicting instructions for the same element.*/
         border: solid;
         border-width: 2px;
         border-color: black;
-
+        border-radius: 10px;
+        margin: 0 2.5%;
     }
 
 }
@@ -149,6 +185,9 @@ two conflicting instructions for the same element.*/
 @media (min-width:768px){
     img{
         width: 8%;
+    }
+    nav{
+        
     }
     main{
         display: flex;
