@@ -14,16 +14,20 @@ two conflicting instructions for the same element.*/
         50% / 70px 70px;
         background-attachment: fixed;
     }
-    nav{
-        display: flex;
-        justify-content: space-around;
-
+    header{
+        position: sticky;
+        top: -18px;
+        overflow: hidden;
         background-color: rgb(206, 20, 20);
         border-color: rgb(136, 3, 3);
         border-style: solid;
         border-width: 5px;
         border-radius: 20px;
         margin: 2.5% 2.5% 5% 2.5%;
+    }
+    nav{
+        display: flex;
+        justify-content: space-around;
     }
     #pages{
         display: flex;
@@ -63,7 +67,7 @@ two conflicting instructions for the same element.*/
         border-style: solid;
         border-width: 5px;
         border-radius: 20px;
-        margin-top: 2.5%;
+        margin: 2.5% 2.5% 2.5% 2.5%;
     }
 
 /*Grouped the modal related stylings together to make it a little easier to look at*/
@@ -128,8 +132,8 @@ two conflicting instructions for the same element.*/
         align-items: center;
     }
     #view-authenticated p{
-
         text-wrap: wrap;
+        margin: 0;
     }
 
     /*Below is CSS for specific pages. First is index.html*/

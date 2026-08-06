@@ -1,5 +1,5 @@
-const order_btn = document.getElementById("order_btn");
-const redirect_btn = document.getElementById("redirect_btn");
+const order_btns = document.getElementsByClassName("order_btn");
+const redirect_btns = document.getElementsByClassName("redirect_btn");
 const cart_btns = document.getElementsByClassName("to_cart_btn");
 const close_btns = document.getElementsByClassName("close_btn");
 const order_modal = document.getElementById("order_modal");
@@ -11,20 +11,24 @@ const cart = (localStorage.cart) ? new Map(JSON.parse(localStorage.cart)) : new 
 
 
 //Button event listeners
-if(redirect_btn == null){
-    order_btn.addEventListener("click", display_cart);
+if(redirect_btns.length == 0){
+    for(let i = 0; i < order_btns.length; i++){
+        order_btns[i].addEventListener("click", displayCart);
+    }
     for(let i = 0; i < cart_btns.length; i++){
         cart_btns[i].addEventListener("click", updateCart);
     }
 } else{
-    redirect_btn.addEventListener("click", redirect);
+    for(let i = 0; i < redirect_btns.length; i++){
+        redirect_btns[i].addEventListener("click", redirect);
+    }
 }
 for(let i = 0; i < close_btns.length; i++){
     close_btns[i].addEventListener("click", close);
 }
 
 //Function Declarations
-function display_cart(){
+function displayCart(){
     order_modal.classList.add("show");
     updateModal()
 }
@@ -110,7 +114,7 @@ function updateModal(){
         }
     );
 
-    //Prevents the display_cart function from replacing the p tag until after there is something in the cart. If the cart returns to empty, the p tag is added back.
+    //Prevents the displayCart function from replacing the p tag until after there is something in the cart. If the cart returns to empty, the p tag is added back.
     if(cart.size != 0){
         cart_box.replaceChildren(...item_list);
 
@@ -136,7 +140,10 @@ function addItem(id = cart.size){
     //Function that will place the item object passed to it and add that to the cart.
 
     if (typeof cart.get(id) == 'object'){
+        
         let food = new Food(cart.get(id).food_name, cart.get(id).food_price, cart.get(id).food_amount + 1);
+        console.log("Food Amount: " +cart.get(id).food_amount);
+        console.log("Food Amount: " + typeof cart.get(id).food_amount);
         cart.set(id, food);
     } else{
         //These are only declared inside this else statement as they are unneeded in a larget scope.
@@ -170,6 +177,7 @@ set the food_amount of the specific item in the cart to whatever value is in the
 function setItem(id){
 
     let amount = event.target.parentElement.querySelector(".item_amount").value;
+    amount = Number(amount);
 
     let food = new Food(cart.get(id).food_name, cart.get(id).food_price, amount)
         cart.set(id, food);

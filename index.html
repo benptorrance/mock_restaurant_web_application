@@ -21,13 +21,13 @@
             <section id ="view-unauthenticated">
                 <button onclick="client.loginWithRedirect({authorizationParams:{screen_hint:'signup'}})">Signup</button>
                 <button onclick="client.loginWithRedirect()">Login</button>
-                <button id="redirect_btn">Start Your Order!</button>
+                <button class="redirect_btn">Start Your Order!</button>
             </section>
             <section id ="view-authenticated">
                 <p>Logged in as:</p>
                 <span id ="user-email"></span>
                 <button onclick="client.logout({logoutParams:{returnTo:location.origin}})">Logout</button>
-                <button id="redirect_btn">Start Your Order!</button>
+                <button class="redirect_btn">Start Your Order!</button>
             </section>
         </nav>
     </header>
@@ -39,7 +39,7 @@
                 <p>Crash Burger's newest sandwich! Only available for a limited time.</p>
             </section>
             <section id="head_info">
-                <p>Welcome to Crash Burgers! For 45 years we have prided ourselves on providing the most delicious and a welcoming environment to our patrons.</p>
+                <p>Welcome to Crash Burgers! For 45 years we have prided ourselves on providing the most delicious meals and a welcoming environment to our patrons.</p>
             </section>
         </section>
         <!--These menu ads are smaller less important ads for the restaurant. They are in a column together on the right side of the screen.-->
