@@ -140,32 +140,36 @@ two conflicting instructions for the same element.*/
     #adverts{
         background-color: rgb(255, 144, 41);
         border: solid;
-        border-width: 2px;
-        border-color: black;
+        border-width: 5px;
+        border-color: rgb(139, 76, 12);
         border-radius: 10px;
         margin: 5% 2.5% 2.5% 2.5%;
     }
     #head_ad, #head_info{
         background-color: rgb(255, 144, 41);
         border: solid;
-        border-width: 2px;
-        border-color: black;
+        border-width: 5px;
+        border-color: rgb(139, 76, 12);
         border-radius: 10px;
         margin: 0 2.5%;
     }
     #head_ad{
         margin-bottom: 5%;
     }
-    .menu_ad, .menu_items, #head_ad, #head_info{
+    .menu_ad, .menu_category, #head_ad, #head_info{
         padding: 0 50px;
+        text-align: center;
     }
     .menu_ad{
         display: flex;
         flex-direction: column;
-        text-align: left;
-        border-style: solid;
-        border-width: 7px;
-        border-color: rgb(90, 45, 0);
+
+        background-color: rgb(255, 183, 90);
+
+        border-style: dashed;
+        border-width: 5px;
+        border-color: rgb(139, 76, 12);
+        border-radius: 10px;
         margin: 2vh 5vw;
     }
 
@@ -178,10 +182,25 @@ two conflicting instructions for the same element.*/
 
         background-color: rgb(255, 144, 41);
         border: solid;
-        border-width: 2px;
-        border-color: black;
+        border-width: 5px;
+        border-color: rgb(139, 76, 12);
         border-radius: 10px;
         margin: 0 2.5%;
+    }
+    .menu_category{
+        background-color: rgb(255, 183, 90);
+
+        border: none;
+        border-width: 3px;
+        border-color:rgb(139, 76, 12);
+        border-radius: 10px;
+        margin: 3% 5%;
+    }
+    .item{
+        background-color: rgb(255, 183, 90);
+        border: dashed;
+        border-radius: 10px;
+        margin: 5%;
     }
 
 }
