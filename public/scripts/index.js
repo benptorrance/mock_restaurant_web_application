@@ -2,8 +2,8 @@ const order_btns = document.getElementsByClassName("order_btn");
 const redirect_btns = document.getElementsByClassName("redirect_btn");
 const cart_btns = document.getElementsByClassName("to_cart_btn");
 const close_btns = document.getElementsByClassName("close_btn");
+const clear_btns = document.getElementsByClassName("clear_btn");
 const order_modal = document.getElementById("order_modal");
-const login_modal = document.getElementById("login_modal");
 
 /*Used a ternary operator here because it was an effective and easily readable way to have the script determine if a new cart needed to be made 
 or if it pulls in existing cart data. */
@@ -26,6 +26,9 @@ if(redirect_btns.length == 0){
 for(let i = 0; i < close_btns.length; i++){
     close_btns[i].addEventListener("click", close);
 }
+for(let i = 0; i < clear_btns.length; i++){
+    clear_btns[i].addEventListener("click", clearCart);
+}
 
 //Function Declarations
 function displayCart(){
@@ -39,7 +42,6 @@ function redirect(){
 
 function close(){
     order_modal.classList.remove("show");
-    login_modal.classList.remove("show");
 }
 
 //This function allows the map to contain all of each item's data in a single key, value pair.
@@ -191,6 +193,12 @@ function setItem(id){
             };
         })
     }
+}
+
+function clearCart(){
+    cart.clear();
+    updateModal();
+    saveCart();
 }
 
 //This function saves the cart to a JSON file in local storage

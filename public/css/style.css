@@ -209,6 +209,7 @@ two conflicting instructions for the same element.*/
 @media (min-width:768px){
     img{
         width: 10%;
+        margin: 1vh 0;
     }
     body{
         display: flex;
@@ -216,6 +217,9 @@ two conflicting instructions for the same element.*/
         align-items: center;
     }
     header{
+        /*Modifying the sticky postioning from the mobile view*/
+        top: -10px;
+
         width: 75vw;
         margin-bottom: 2%;
     }
