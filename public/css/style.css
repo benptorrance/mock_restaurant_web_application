@@ -49,11 +49,11 @@ two conflicting instructions for the same element.*/
         width: 20vw;
         border-radius: 10%;
     }
-    .login_b{
+    .order_btn{
         padding: 5% 0;
     }
-    .order_b{
-        padding: 5% 0;
+    .to_cart_btn{
+        padding: 2% 0;
     }
     main{
         display: flex;
@@ -189,12 +189,13 @@ two conflicting instructions for the same element.*/
     }
     .menu_category{
         background-color: rgb(255, 183, 90);
+        
+        width: 50vw;
 
         border: none;
         border-width: 3px;
-        border-color:rgb(139, 76, 12);
         border-radius: 10px;
-        margin: 3% 5%;
+        margin: 3vw 5%;
     }
     .item{
         background-color: rgb(255, 183, 90);
@@ -207,25 +208,102 @@ two conflicting instructions for the same element.*/
 /*Media query for desktop screens.*/
 @media (min-width:768px){
     img{
-        width: 8%;
+        width: 10%;
+    }
+    body{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    header{
+        width: 75vw;
+        margin-bottom: 2%;
+    }
+    header a{
+        font-size: 16pt;
     }
     nav{
-        
+        justify-content: space-around;
+    }
+    nav button{
+        max-width: 10vw;
+    }
+    .to_cart_btn{
+        max-width: fit-content;
+        padding: 5%;
     }
     main{
         display: flex;
         flex-direction: row;
         justify-content: space-around;   
     }
-    #headline, #adverts, #head_ad{
-        margin-top: 0;
+    footer{
+        width: 75vw;
+        padding: 0px;
+        margin-top: 2%;
     }
+
+    /*Index Page only CSS*/
     #headline{
         display: flex;
         flex-direction: column;
-        max-width: 50vw;
+        max-width: 60vw;
+        margin: 0%;
+    }
+    #head_ad{
+        margin: 0% 3%;
+    }
+    #head_info{
+        margin: 4% 3%;
     }
     #adverts{
-        max-width: 30vw;
+        max-width: 35vw;
+        margin: 0% 3%;
+    }
+
+    /*Menu Page only CSS*/
+    #menu{
+        align-items: unset;
+    }
+    #menu{
+        display: grid;
+        align-content: top;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 20vh 20vh 20vh 10vh 20vh 20vh 20vh 20vh 20vh 20vh 10vh 20vh 10vh 20vh 20vh 20vh ;
+
+        background-color: rgb(255, 144, 41);
+        border: solid;
+        border-width: 5px;
+        border-color: rgb(139, 76, 12);
+        border-radius: 10px;
+        width: 70vw;
+        margin: 0 2.5%;
+    }
+    .menu_category{
+        box-sizing: border-box;
+        max-width: fit-content;
+        height: fit-content;
+        margin: 5% 5%;
+    }
+    #c_1{
+        grid-row-start: 1;
+    }
+    #c_2{
+
+        grid-row-start: 4;
+    }
+    #c_3{
+        grid-row-start: 1;
+    }
+    #c_4{
+        grid-row-start: 5;
+        grid-column-start: 2;
+    }
+    #c_5{
+        grid-row-start: 12;
+    }
+    #c_6{
+        grid-row-start: 13;
+        grid-column-start: 2;
     }
 }
