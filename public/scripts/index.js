@@ -1,3 +1,6 @@
+import {user} from "./auth0.js"
+console.log(user);
+
 const order_btns = document.getElementsByClassName("order_btn");
 const redirect_btns = document.getElementsByClassName("redirect_btn");
 const cart_btns = document.getElementsByClassName("to_cart_btn");
@@ -29,6 +32,7 @@ for(let i = 0; i < close_btns.length; i++){
 for(let i = 0; i < clear_btns.length; i++){
     clear_btns[i].addEventListener("click", clearCart);
 }
+
 
 //Function Declarations
 function displayCart(){
@@ -144,8 +148,6 @@ function addItem(id = cart.size){
     if (typeof cart.get(id) == 'object'){
         
         let food = new Food(cart.get(id).food_name, cart.get(id).food_price, cart.get(id).food_amount + 1);
-        console.log("Food Amount: " +cart.get(id).food_amount);
-        console.log("Food Amount: " + typeof cart.get(id).food_amount);
         cart.set(id, food);
     } else{
         //These are only declared inside this else statement as they are unneeded in a larget scope.
@@ -203,6 +205,7 @@ function clearCart(){
 
 //This function saves the cart to a JSON file in local storage
 function saveCart(){
-    localStorage.cart = JSON.stringify(Array.from(cart.entries()))
+    let array = Array.from(cart.entries());
+    localStorage.cart = JSON.stringify(array);
 }
 

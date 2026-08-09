@@ -2,10 +2,8 @@
 const displayView = name => ['view-loading', 'view-error', 'view-authenticated', 'view-unauthenticated'].forEach((v) => {
     if(v === name){
         document.getElementById(`${v}`).style.display = "flex";
-        console.log("current view: " + v);
     }else{
         document.getElementById(`${v}`).style.display = "none";
-        console.log(v);
     }
 });
 const setTextContent = (id, content) => document.getElementById(id).textContent = content;
@@ -34,7 +32,8 @@ if (location.search.includes("code=") && location.search.includes("state=")) {
 }
 
 if (await window.client.isAuthenticated()) {
-    const user = await window.client.getUser();
+    //This is the export that is not working. 
+    export const user = await window.client.getUser();
     setTextContent("user-email", user.email);
     displayView("view-authenticated");
     return;
