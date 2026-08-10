@@ -43,6 +43,7 @@
                     <p>Cart is empty!</p>
                 </section>
                 <button class="clear_btn">Clear Cart</button>
+                <button id="to_pickup_btn">Continue</button>
             </section>
         </section>
         <section id="pickup_modal" class="modal_overlay">
@@ -50,8 +51,20 @@
                 <button class="close_btn">X</button>
                 <h2>Please select a Restaurant to send your Order to!</h2>
                 <section>
-                    <input type="radio" name="address" value="1095 Runway Street, Indianapolis, Indiana">
+                    <input type="radio" id="location1" name="address" value="1095 Runway Street, Indianapolis, Indiana">
+                    <label for="location1">1095 Runway Street, Indianapolis, Indiana</label>
+                    <input type="radio" id="location2" name="address" value="1095 Runway Street, Indianapolis, Indiana">
+                    <label for="location2">807 Greenlight Avenue, Indianapolis, Indiana</label>
                 </section>
+                <button id="place_order_btn">Place Order</button>
+            </section>
+        </section>
+        <section id="progress_modal" class="modal_overlay">
+            <section class="modal_box">
+                <button class="close_btn">X</button>
+                <h2>Your order is being worked on!</h2>
+                <p>Please pick it up at: <span id="time"></span>!</p>
+                <button id="received_btn">Order Complete</button>
             </section>
         </section>
         <section id="menu">

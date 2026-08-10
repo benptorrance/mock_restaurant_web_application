@@ -1,10 +1,18 @@
+//Buttons
 const order_btns = document.getElementsByClassName("order_btn");
 const redirect_btns = document.getElementsByClassName("redirect_btn");
 const cart_btns = document.getElementsByClassName("to_cart_btn");
 const close_btns = document.getElementsByClassName("close_btn");
 const clear_btns = document.getElementsByClassName("clear_btn");
+const to_pickup_btn = document.getElementById("to_pickup_btn");
+const place_order_btn = document.getElementById("place_order_btn");
+const received_btn = document.getElementById("received_btn");
+
+//Modals
 const order_modal = document.getElementById("order_modal");
 const pickup_modal = document.getElementById("pickup_modal");
+const progress_modal = document.getElementById("progress_modal");
+
 let email = "Guest";
 
 /*Used a ternary operator here because it was an effective and easily readable way to have the script determine if a new cart needed to be made 
@@ -30,6 +38,9 @@ for(let i = 0; i < close_btns.length; i++){
 for(let i = 0; i < clear_btns.length; i++){
     clear_btns[i].addEventListener("click", clearCart);
 }
+to_pickup_btn.addEventListener("click", displayPickup);
+place_order_btn.addEventListener("click", displayProgress);
+received_btn.addEventListener("click", completeOrder);
 
 
 //Auth0 integration below
@@ -83,7 +94,27 @@ displayView("view-unauthenticated");
 //Function Declarations
 function displayCart(){
     order_modal.classList.add("show");
-    updateModal()
+    updateModal(false)
+}
+
+function displayPickup(){
+    if (cart.size == 0){
+        empty = true;
+        updateModal(empty);
+    }else{
+        order_modal.classList.remove("show");
+        pickup_modal.classList.add("show");
+    }
+}
+
+function displayProgress(){
+    pickup_modal.classList.remove("show");
+    progress_modal.classList.add("show");
+}
+
+function completeOrder(){
+    progress_modal.classList.remove("show");
+    clearCart();
 }
 
 function redirect(){
@@ -92,6 +123,8 @@ function redirect(){
 
 function close(){
     order_modal.classList.remove("show");
+    pickup_modal.classList.remove("show");
+    progress_modal.classList.remove("show");
 }
 
 //This function allows the map to contain all of each item's data in a single key, value pair.
@@ -123,11 +156,11 @@ function updateCart(){
     } else if(event.target.className == "item_amount"){
         setItem(id);
     }
-    updateModal();
+    updateModal(false);
     saveCart();
 }
 
-function updateModal(){
+function updateModal(empty = false){
     const cart_box = document.getElementById("cart_modal");
     const item_list = []
 
@@ -140,7 +173,6 @@ function updateModal(){
         let amount = document.createElement("INPUT");
         let add = document.createElement("button");
         let remove = document.createElement("button");
-
         name.innerText = value.food_name;
         price.innerText = value.food_price;
         add.innerText = "+";
@@ -165,11 +197,9 @@ function updateModal(){
         item_list.push(section);
         }
     );
-
     //Prevents the displayCart function from replacing the p tag until after there is something in the cart. If the cart returns to empty, the p tag is added back.
     if(cart.size != 0){
         cart_box.replaceChildren(...item_list);
-
         //Note: This can be updated so that one event listener can watch the parent element and determine which function to run by the event.target's class element.
         for(let i = 0; i < item_list.length; i++){
             item_list[i].querySelector(".item_add").addEventListener("click", updateCart);
@@ -179,6 +209,19 @@ function updateModal(){
                     updateCart();
             });
         }
+    } else if(cart.size == 0 && empty == true){
+        let empty_cart = [];
+        let p1 = document.createElement("p");
+        let p2 = document.createElement("p");
+        p1.innerText = "Cart is empty!";
+        p2.innerText = "Please add an item to your cart before continuing.";
+
+        p2.style.color = "red";
+
+        empty_cart.push(p1);
+        empty_cart.push(p2);
+
+        cart_box.replaceChildren(p1, p2);
     } else{
         let para = document.createElement("p");
         para.innerText = "Cart is empty!";
@@ -245,14 +288,13 @@ function setItem(id){
 
 function clearCart(){
     cart.clear();
-    updateModal();
+    updateModal(false);
     saveCart();
 }
 
 //This function saves the cart to a JSON file in local storage
 function saveCart(){
     let array = Array.from(cart.entries());
-    console.log (email);
     if (email != "Guest"){
         localStorage.setItem(email, JSON.stringify(array));
     } else{
