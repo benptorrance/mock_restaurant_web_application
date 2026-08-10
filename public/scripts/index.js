@@ -1,17 +1,15 @@
-import {user} from "./auth0.js"
-console.log(user);
-
 const order_btns = document.getElementsByClassName("order_btn");
 const redirect_btns = document.getElementsByClassName("redirect_btn");
 const cart_btns = document.getElementsByClassName("to_cart_btn");
 const close_btns = document.getElementsByClassName("close_btn");
 const clear_btns = document.getElementsByClassName("clear_btn");
 const order_modal = document.getElementById("order_modal");
+const pickup_modal = document.getElementById("pickup_modal");
+let email = "Guest";
 
 /*Used a ternary operator here because it was an effective and easily readable way to have the script determine if a new cart needed to be made 
 or if it pulls in existing cart data. */
-const cart = (localStorage.cart) ? new Map(JSON.parse(localStorage.cart)) : new Map();
-
+let cart = (localStorage.getItem("Guest")) ? new Map(JSON.parse(localStorage.getItem("Guest"))) : new Map();
 
 //Button event listeners
 if(redirect_btns.length == 0){
@@ -32,6 +30,54 @@ for(let i = 0; i < close_btns.length; i++){
 for(let i = 0; i < clear_btns.length; i++){
     clear_btns[i].addEventListener("click", clearCart);
 }
+
+
+//Auth0 integration below
+
+// Helpers
+const displayView = name => ['view-loading', 'view-error', 'view-authenticated', 'view-unauthenticated'].forEach((v) => {
+    if(v === name){
+        document.getElementById(`${v}`).style.display = "flex";
+    }else{
+        document.getElementById(`${v}`).style.display = "none";
+    }
+});
+const setTextContent = (id, content) => document.getElementById(id).textContent = content;
+
+(async () => {
+    // Initialize the Auth0 SDK
+    window.client = await auth0.createAuth0Client({
+    domain: 'dev-s5bvztk226kbwjaq.us.auth0.com',
+    clientId: '0B1EU0GSFYJe3H5ZcUXvb3PBre1Qr8lP',
+    authorizationParams: { redirect_uri: location.origin },
+});
+
+// Handle errors returned by Auth0 after a redirect
+if (location.search.includes("error=")) {
+    const params = new URLSearchParams(location.search);
+    setTextContent("view-error", `Error: ${params.get("error")} — ${params.get("error_description")}`);
+    displayView("view-error");
+    history.replaceState({}, "", location.pathname);
+    return;
+}
+
+// Handle the redirect callback after a successful login
+if (location.search.includes("code=") && location.search.includes("state=")) {
+    await window.client.handleRedirectCallback();
+    history.replaceState({}, "", location.pathname);
+}
+
+if (await window.client.isAuthenticated()) {
+    const user = await window.client.getUser();
+    email = user.email;
+    setTextContent("user-email", email);
+    loadCart(email);
+    displayView("view-authenticated");
+    return;
+}
+
+displayView("view-unauthenticated");
+})();
 
 
 //Function Declarations
@@ -206,6 +252,20 @@ function clearCart(){
 //This function saves the cart to a JSON file in local storage
 function saveCart(){
     let array = Array.from(cart.entries());
-    localStorage.cart = JSON.stringify(array);
+    console.log (email);
+    if (email != "Guest"){
+        localStorage.setItem(email, JSON.stringify(array));
+    } else{
+        localStorage.setItem("Guest", JSON.stringify(array));
+    }
 }
 
+//This function loads a cart once a user logs in.
+function loadCart(email){
+
+    if (email == "Guest"){
+        cart = new Map(JSON.parse(localStorage.getItem("Guest")));
+    } else{
+        cart = new Map(JSON.parse(localStorage.getItem(email)));
+    }
+}
