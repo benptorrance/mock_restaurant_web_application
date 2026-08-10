@@ -10,18 +10,45 @@
 <body id="about">
     <header>
         <nav>
-            <img id="logo" src="/public/images/cburger_logo.png">
-            <section>
+            <img id="logo" src="../images/cburger_logo.png">
+            <section id="pages">
                 <a href="/index.html">Home</a>
-                <a href="./menu.html">Menu</a>
-                <a href="./about.html">About</a>
+                <a href="./public/pages/menu.html">Menu</a>
+                <a href="./public/pages/about.html">About</a>
             </section>
-            <!--Button element that opens the ordering modal-->
-            <section>
-                <button id="login_btn">Sign In</button>
-                <button id="redirect_btn">Start Your Order!</button>
+            <section id="view-loading">Loading...</section>
+            <section id="view-error"></section>
+            <section id ="view-unauthenticated">
+                <button onclick="client.loginWithRedirect({authorizationParams:{screen_hint:'signup'}})">Signup</button>
+                <button onclick="client.loginWithRedirect()">Login</button>
+                <button class="redirect_btn">Start Your Order!</button>
+            </section>
+            <section id ="view-authenticated">
+                <p>Logged in as:</p>
+                <span id ="user-email"></span>
+                <button onclick="client.logout({logoutParams:{returnTo:location.origin}})">Logout</button>
+                <button class="redirect_btn">Start Your Order!</button>
             </section>
         </nav>
     </header>
+    <main>      
+        <!--These tags are the central two sections. They take up most of the middle left of the screen.-->
+        <section id="about">
+            <section id="head_ad">
+                <h1>About Crash Burgers</h1>
+                <p>Welcome to Crash Burgers! For 45 years we have prided ourselves on providing the most delicious meals and a welcoming environment to our patrons.</p>
+            </section>
+        </section>
+    </main>
+    <footer>
+        <section>
+            <h3>Contact Info</h3>
+            <p>crashburgers@delicious.com</p>
+            <p>+1 (201)-974-7382</p>
+            <p>1095 Runway Street, Indianapolis, Indiana</p>
+        </section>
+    </footer>
 </body>
+<script src="https://cdn.auth0.com/js/auth0-spa-js/2.18/auth0-spa-js.production.js"></script>
+<script src="../scripts/index.js"></script>
 </html>
