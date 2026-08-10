@@ -20,6 +20,7 @@ or if it pulls in existing cart data. */
 let cart = (localStorage.getItem("Guest")) ? new Map(JSON.parse(localStorage.getItem("Guest"))) : new Map();
 
 //Button event listeners
+//If statement changes what event listeners are added depending on what is on the page.
 if(redirect_btns.length == 0){
     for(let i = 0; i < order_btns.length; i++){
         order_btns[i].addEventListener("click", displayCart);
@@ -27,6 +28,9 @@ if(redirect_btns.length == 0){
     for(let i = 0; i < cart_btns.length; i++){
         cart_btns[i].addEventListener("click", updateCart);
     }
+    to_pickup_btn.addEventListener("click", displayPickup);
+    place_order_btn.addEventListener("click", displayProgress);
+    received_btn.addEventListener("click", completeOrder);
 } else{
     for(let i = 0; i < redirect_btns.length; i++){
         redirect_btns[i].addEventListener("click", redirect);
@@ -38,9 +42,6 @@ for(let i = 0; i < close_btns.length; i++){
 for(let i = 0; i < clear_btns.length; i++){
     clear_btns[i].addEventListener("click", clearCart);
 }
-to_pickup_btn.addEventListener("click", displayPickup);
-place_order_btn.addEventListener("click", displayProgress);
-received_btn.addEventListener("click", completeOrder);
 
 
 //Auth0 integration below
