@@ -93,8 +93,13 @@ two conflicting instructions for the same element.*/
         padding: 30px;
         border-radius: 5px;
         margin: 100px auto;
-        background: white;
+        background-color: rgb(255, 144, 41);
+        border: solid;
+        border-width: 5px;
+        border-color: rgb(139, 76, 12);
+        border-radius: 10px;
     }
+    
     .item_add, .item_rmve{
         max-width: 10%;
         margin: 0 1%;
@@ -110,10 +115,14 @@ two conflicting instructions for the same element.*/
         width: 50px;
         font-size: 18px;
         border-radius: 8px;
-        background: none;
+        background-color: rgb(185, 126, 66);
         cursor: pointer;
     }
-
+    .buttons{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
     /*Login status styling*/
     #view-loading{
         display: flex;
@@ -246,6 +255,13 @@ two conflicting instructions for the same element.*/
         padding: 0px;
         margin-top: 2%;
     }
+
+    
+    .clear_btn, #to_pickup_btn, #place_order_btn{
+        display: block;
+        max-width: 10vw;
+    }
+
 
     /*Index Page only CSS*/
     #headline{

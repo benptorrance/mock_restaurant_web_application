@@ -7,6 +7,8 @@ const clear_btns = document.getElementsByClassName("clear_btn");
 const to_pickup_btn = document.getElementById("to_pickup_btn");
 const place_order_btn = document.getElementById("place_order_btn");
 const received_btn = document.getElementById("received_btn");
+const l1 = document.getElementById("location1");
+const l2 = document.getElementById("location2");
 
 //Modals
 const order_modal = document.getElementById("order_modal");
@@ -109,8 +111,25 @@ function displayPickup(){
 }
 
 function displayProgress(){
-    pickup_modal.classList.remove("show");
-    progress_modal.classList.add("show");
+    let locations = document.getElementById("restaurants");
+    if(document.querySelector('input[name="address"]:checked') != null){
+        pickup_modal.classList.remove("show");
+        progress_modal.classList.add("show");
+
+        let time = document.getElementById("time");
+        let dest = document.getElementById("destination");
+        
+        time.innerText = getTime();
+        dest.innerText = document.querySelector('input[name="address"]:checked').value;
+    }else{
+        let warning = document.createElement("p");
+        let label1 = document.getElementById("label1");
+        let label2 = document.getElementById("label2");
+
+        warning.innerText = "Please select an Address to continue."
+
+        locations.replaceChildren(warning, l1, label1, l2, label2);
+    }
 }
 
 function completeOrder(){
@@ -311,4 +330,11 @@ function loadCart(email){
     } else{
         cart = new Map(JSON.parse(localStorage.getItem(email)));
     }
+}
+
+function getTime(){
+    let wait = Math.random() * (30 - 15) + 15;
+    wait = Math.round(wait);
+
+    return wait;
 }
