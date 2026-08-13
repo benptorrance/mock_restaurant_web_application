@@ -40,16 +40,20 @@ Integrate the Auth 0 API to allow users to create and login with an account that
 
 # VII. Installation Instructions
 
-Note: In order to be able to run this program, please make sure that you have all of the following things installed using the Visual Studio Code terminal
+Note: In order to be able to run this program, the following must be installed:
 
-Node v 24.14.0
-npm v 11.9.0
+Node v 24.14.0 or later
+npm v 11.9.0 or later
+http-server@14.1.1 or later
 
-- Download and install Visual Studio Code.
+- Download and install Visual Studio Code from Microsoft's website.
+- Go to Nodejs.org and install Node v24.14.0 or later.
 - Clone the repository to a folder somewhere on your computer using git Bash if you have that installed or download the repository as a .zip file and extract it to a folder somewhere on your computer.
 - Open up Visual Studio Code with the folder that you cloned the repository to as the root.
-- Install Node and npm using Visual Studio Code's built in Terminal.
+- Verify that your Version of Node and npm is correct with the commands "node -v" and "npm -v". (If you get an error message about
+  - Note: If you get an error message when trying to run either of the above two commands that says something about scripts being disabled, then open up Windows       Powershell on your computer and enter this command "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser". It should fix that issue. 
 - Copy and paste this command into the Terminal "npx http-server -p 5500 -a localhost -c-1 ./"
+- Enter "y" if it asks you to install http-server@14.1.1.
 - Open up a browser of your choice and go to localhost:5500
 
 # VIII. User Test Credentials
