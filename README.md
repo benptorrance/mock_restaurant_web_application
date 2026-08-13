@@ -46,7 +46,7 @@ Node v 24.14.0
 npm v 11.9.0
 
 - Download and install Visual Studio Code.
-- Clone the repository to a folder somewhere on your computer.
+- Clone the repository to a folder somewhere on your computer using git Bash if you have that installed or download the repository as a .zip file and extract it to a folder somewhere on your computer.
 - Open up Visual Studio Code with the folder that you cloned the repository to as the root.
 - Install Node and npm using Visual Studio Code's built in Terminal.
 - Copy and paste this command into the Terminal "npx http-server -p 5500 -a localhost -c-1 ./"
